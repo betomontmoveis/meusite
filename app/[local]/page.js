@@ -28,13 +28,20 @@ export async function generateMetadata({ params }) {
   const tituloSEO = `Montador de Móveis Profissional em ${nomeBairro}`;
   const descricaoSEO = `Serviço de montagem de móveis em ${nomeBairro}. Atendimento ágil, com garantia e preço justo. Chame agora o Beto Montador!`;
 
+  // URL canônica limpa (sem parâmetros)
+  const canonicalUrl = `https://www.betomontadordemoveis.com.br/${bairroEncontrado?.slug || 'curitiba'}`;
+
   return {
     title: tituloSEO,
     description: descricaoSEO,
+    keywords: `montador de móveis ${nomeBairro}, montagem de móveis ${nomeBairro}, Beto montador ${nomeBairro}`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: tituloSEO,
       description: descricaoSEO,
-      url: `https://www.betomontadordemoveis.com.br/${bairroEncontrado?.slug || 'curitiba'}`,
+      url: canonicalUrl,
       type: 'website',
       images: [
         {
@@ -44,7 +51,6 @@ export async function generateMetadata({ params }) {
         },
       ],
     },
-    keywords: `montador de móveis ${nomeBairro}, montagem de móveis ${nomeBairro}, Beto montador ${nomeBairro}`,
   };
 }
 
