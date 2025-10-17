@@ -2,7 +2,7 @@ import "./globals.css";
 import { Poppins, Inter } from "next/font/google";
 import Script from "next/script";
 import GtmNoScript from "./components/GtmNoScript";
-import Header from "./components/Header"; // ✅ Adicione esta linha
+import Header from "./components/Header"; // ✅ Header global
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,7 +25,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR" className={`${poppins.variable} ${inter.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${poppins.variable} ${inter.variable}`}
+    >
       <head>
         <Script
           id="google-tag-manager"
@@ -42,10 +45,11 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body className="font-inter antialiased bg-white text-gray-900">
+      {/* ✅ Agora o corpo usa Poppins (font-sans) */}
+      <body className="font-sans antialiased bg-white text-gray-900">
         <GtmNoScript />
 
-        <Header /> {/* ✅ Agora o Header será exibido em todas as páginas */}
+        <Header /> {/* ✅ Header fixo em todas as páginas */}
 
         {children}
       </body>

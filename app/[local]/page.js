@@ -1,5 +1,6 @@
 import { BAIRROS } from "../../data/bairros";
 // Importações do seu Layout
+import FreightService from "../components/FreightService";
 import Header from "../components/Header";
 import Hero from "../components/Hero"; 
 import WhyChooseUs from "../components/WhyChooseUs";
@@ -10,6 +11,7 @@ import FAQ from "../components/FAQ";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
+
 
 // 1. Geração de Rotas (SSG)
 export async function generateStaticParams() {
@@ -85,6 +87,7 @@ export default function LocalPage({ params }) {
       {/* RESTANTE DO CONTEÚDO */}
       <WhyChooseUs />
       <Services id="servicos" />
+      <FreightService id="frete" />
       <Projects id="projetos" />
       <Testimonials id="depoimentos" />
       <FAQ />

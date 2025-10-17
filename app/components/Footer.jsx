@@ -7,28 +7,31 @@ import { Facebook, Instagram, Mail, Phone } from "lucide-react";
 const Footer = () => {
   const handleScrollToSection = (e) => {
     e.preventDefault();
-    const element = document.getElementById('areas-atendimento');
+    const element = document.getElementById("areas-atendimento");
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
   return (
-    <footer className="bg-[#0148B2] text-white py-12 mt-12">
+    <footer className="bg-[#0148B2] text-white pt-8 py-12 mt-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* GRID PRINCIPAL */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-10">
-          
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-10 items-start content-start text-left">
           {/* COLUNA 1 */}
-          <div>
-            <h3 className="text-2xl font-bold mb-4">Beto Montador de Móveis</h3>
+          <div className="text-left">
+            <h3 className="text-2xl font-bold mb-4 mt-0">
+              Beto Montador de Móveis
+            </h3>
             <p className="text-white/80 leading-relaxed mb-6">
-              Montagem profissional de móveis em Curitiba e região metropolitana.
-              Mais de 15 anos de experiência e avaliação 5 estrelas.
+              Montagem profissional de móveis em Curitiba e região
+              metropolitana. Mais de 15 anos de experiência e avaliação 5
+              estrelas.
             </p>
 
             {/* REDES SOCIAIS */}
             <div>
-              <h4 className="text-lg font-semibold mb-3">Siga-nos</h4>
+              <h4 className="text-lg font-semibold mb-3 mt-0">Siga-nos</h4>
               <div className="flex gap-4">
                 <a
                   href="https://www.facebook.com/betomontagens/"
@@ -51,8 +54,8 @@ const Footer = () => {
           </div>
 
           {/* COLUNA 2 */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contato</h4>
+          <div className="text-left">
+            <h4 className="text-lg font-semibold mb-4 mt-0">Contato</h4>
             <div className="space-y-3">
               <a
                 href="tel:5541997009479"
@@ -72,8 +75,10 @@ const Footer = () => {
           </div>
 
           {/* COLUNA 3 */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Informações Importantes</h4>
+          <div className="text-left">
+            <h4 className="text-lg font-semibold mb-4 mt-0">
+              Informações Importantes
+            </h4>
             <ul className="space-y-3">
               <li>
                 <a
@@ -91,7 +96,8 @@ const Footer = () => {
         {/* DIVISÓRIA E COPYRIGHT */}
         <div className="border-t border-white/20 pt-6 text-center text-sm">
           <p className="text-white/70 mb-1">
-            © 2025 Todos os direitos reservados. | Beto Montador de Móveis | CNPJ: 46.566.508/0001-52
+            © 2025 Todos os direitos reservados. | Beto Montador de Móveis | CNPJ:
+            46.566.508/0001-52
           </p>
           <p className="text-white/60">
             Site Criado Por{" "}

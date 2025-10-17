@@ -1,14 +1,32 @@
 @import "tailwindcss";
 
+/* ===============================
+   ⚙️ CONFIGURAÇÕES GERAIS
+   =============================== */
+
+/* Suaviza o scroll */
 html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Remove qualquer espaço branco ou margem padrão */
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: #0148B2; /* fundo igual ao topo do header, evita faixa branca */
 }
 
+/* ===============================
+   🎯 MODO CLARO FORÇADO
+   =============================== */
+:root {
+  --background: #ffffff;   /* fundo branco fixo */
+  --foreground: #171717;   /* texto escuro padrão */
+  color-scheme: only light; /* força o navegador a ignorar modo escuro */
+}
+
+/* Configuração de temas e fontes */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -16,23 +34,57 @@ html {
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ===============================
+   🌈 ESTILO BASE DO SITE
+   =============================== */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
+/* Garante que o header sempre encoste no topo */
+header {
+  margin: 0 !important;
+  padding: 0.5rem 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 50;
+  background-color: #0148B2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Compensa o header fixo (ajusta a primeira seção) */
+main {
+  padding-top: 0px; /* mesmo tamanho da altura do header */
+  background-color: var(--background);
+}
+
+/* Footer */
 footer {
   margin-top: 0 !important;
+  background-color: #0148B2;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
 }
 
-section {
-  margin-bottom: 0 !important;
+/* ===============================
+   🆕 FONTES GLOBAIS (SEM ERROS)
+   =============================== */
+
+/* Poppins → textos do corpo */
+body, p, span, a, li, input, textarea, button {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+/* Inter → títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-inter), sans-serif;
 }

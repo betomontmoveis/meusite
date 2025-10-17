@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Truck, Package, CheckCircle, MessageSquare } from 'lucide-react'; 
@@ -24,7 +25,7 @@ const FreightService = ({ id }) => {
     ];
     
     return (
-        <section id={id} className="py-20 md:py-32 bg-white">
+        <section id={id} className="py-20 md:py-32 bg-white mb-0">
             <div className="container mx-auto px-4 md:px-8 max-w-7xl">
                 
                 {/* Título e Subtítulo */}

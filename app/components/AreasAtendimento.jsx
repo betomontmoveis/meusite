@@ -71,7 +71,7 @@ export default function AreasAtendimento() {
   const [expandido, setExpandido] = useState(false);
 
   return (
-    <section className="bg-white py-16 px-6">
+    <section className="bg-white py-16 px-6 mb-0">
       <div className="container mx-auto max-w-6xl">
         {/* Título */}
         <div className="text-center mb-12">

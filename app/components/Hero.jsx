@@ -23,35 +23,40 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
     // Subtítulo
     subtitleMobile: '14px',    // Ajuste aqui para mobile
     subtitleTablet: '18px',    // Tablet
-    subtitleDesktop: '22px',   // Desktop
+    subtitleDesktop: '20px',   // Desktop
     subtitleMarginBottom: '12px', // Espaço após subtítulo
 
     // Título Principal
     titleMobile: '32px',       // Mobile
     titleTablet: '48px',       // Tablet  
-    titleDesktop: '64px',      // Desktop
+    titleDesktop: '66px',      // Desktop
     titleLineHeight: 1.1,      // Altura das linhas (1-1.5)
     titleMarginBottom: '20px', // Espaço após título
 
     // Descrição
     descriptionMobile: '16px',
     descriptionTablet: '18px',
-    descriptionDesktop: '20px',
+    descriptionDesktop: '18px',
     descriptionLineHeight: 1.6,
     descriptionMarginBottom: '24px',
 
     // Espaçamento geral
     containerPaddingMobile: '20px',    // Espaço lateral mobile
     containerPaddingTablet: '32px',    // Espaço lateral tablet
-    containerPaddingDesktop: '40px',   // Espaço lateral desktop
-    containerPaddingTop: 'clamp(0px, 0px, -20px)',  // Mobile: 0px (sem subir) | Desktop: -20px (sobe)
+    containerPaddingDesktop: '80px',   // Espaço lateral desktop
+    containerPaddingTop: 'clamp(-40px, -5vw, -80px)',  // Mobile: 0px (sem subir) | Desktop: -10px (sobe)
   };
 
   return (
     <section
       id={id}
       className="relative w-full overflow-hidden"
-      style={{ minHeight: '100vh' }}
+      style={{ 
+        minHeight: '100vh',
+        display: 'flex',                // 🆕 AJUSTE - ativa alinhamento flex na seção
+        flexDirection: 'column',        // 🆕 AJUSTE - organiza verticalmente
+        justifyContent: 'center'        // 🆕 AJUSTE - centraliza o conteúdo no meio da tela
+      }}
     >
       {/* 📸 Imagem de Fundo */}
       <img
@@ -65,7 +70,7 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
       <div
         className="relative w-full flex items-center"
         style={{
-          minHeight: '100vh',
+          minHeight: 'calc(100vh - 60px)', // 🆕 AJUSTE - garante espaço p/ seta sem cortar
           marginTop: typography.containerPaddingTop,
         }}
       >
@@ -74,8 +79,8 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
           style={{
             paddingLeft: `clamp(${typography.containerPaddingMobile}, 5vw, ${typography.containerPaddingDesktop})`,
             paddingRight: `clamp(${typography.containerPaddingMobile}, 5vw, ${typography.containerPaddingDesktop})`,
-            marginLeft: '-10px',  // Mobile: -10px | Desktop: ajuste clamp se quiser
-            marginRight: '60px',  // Desktop: 60px | Altere aqui para 0px, 20px, 40px, 60px, etc
+            marginLeft: '-10px',
+            marginRight: '60px',
           }}
         >
           <fmMotion.motion.div
@@ -193,7 +198,7 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
       </div>
 
       {/* ⬇️ Indicador de Rolagem */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2"> {/* 🆕 Ajustado bottom de 8 → 6 */}
         <fmMotion.motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
