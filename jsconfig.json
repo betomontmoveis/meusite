@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      // Define que o alias '@/' aponta para a raiz do projeto.
+      // Isso deve resolver a maioria dos seus problemas de importação.
+      "@/*": ["./*"] 
     }
   }
 }

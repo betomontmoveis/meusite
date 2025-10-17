@@ -1,0 +1,22 @@
+# /public/robots.txt
+
+# Regras gerais para todos os rastreadores
+User-agent: *
+
+# Permite acesso a todas as páginas por padrão
+Allow: /
+
+# Bloqueia rotas administrativas, de API e dados brutos que não são para busca
+Disallow: /admin
+Disallow: /api
+Disallow: /*.json$
+
+# Bloqueia URLs com parâmetros de ordenação/filtro, que geralmente criam conteúdo duplicado
+Disallow: /*?sort=
+Disallow: /*?filter=
+
+# O Google e outros motores modernos ignoram 'Crawl-delay' e preferem gerenciar a taxa de rastreamento no Search Console.
+# Por isso, é melhor remover ou definir um valor de 0, mas vou removê-lo para a regra geral.
+
+# --- Sitemap Location ---
+Sitemap: https://www.betomontadordemoveis.com.br/sitemap.xml
