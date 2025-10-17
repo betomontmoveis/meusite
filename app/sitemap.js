@@ -1,4 +1,4 @@
-import { BAIRROS } from './data/bairros';
+import { BAIRROS } from '@/data/bairros';
 
 export default function sitemap() {
   const baseUrl = 'https://www.betomontadordemoveis.com.br';
