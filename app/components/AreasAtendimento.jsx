@@ -1,71 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-
-const BAIRROS = [
-  // --- CURITIBA ---
-  { nome: "Abranches", slug: "abranches" },
-  { nome: "Água Verde", slug: "agua-verde" },
-  { nome: "Ahú", slug: "ahu" },
-  { nome: "Alto Boqueirão", slug: "alto-boqueirao" },
-  { nome: "Alto Da Glória", slug: "alto-da-gloria" },
-  { nome: "Atuba", slug: "atuba" },
-  { nome: "Bacacheri", slug: "bacacheri" },
-  { nome: "Batel", slug: "batel" },
-  { nome: "Bigorrilho", slug: "bigorrilho" },
-  { nome: "Boa Vista", slug: "boa-vista" },
-  { nome: "Bom Retiro", slug: "bom-retiro" },
-  { nome: "Butiatuvinha", slug: "butiatuvinha" },
-  { nome: "Cabral", slug: "cabral" },
-  { nome: "Cajuru", slug: "cajuru" },
-  { nome: "Campo Comprido", slug: "campo-comprido" },
-  { nome: "Centro", slug: "centro" },
-  { nome: "Cidade Industrial CIC", slug: "cidade-industrial-cic" },
-  { nome: "Cristo Rei", slug: "cristo-rei" },
-  { nome: "Guabirotuba", slug: "guabirotuba" },
-  { nome: "Hugo Lange", slug: "hugo-lange" },
-  { nome: "Jardim Botânico", slug: "jardim-botanico" },
-  { nome: "Juvevê", slug: "juveve" },
-  { nome: "Lindóia", slug: "lindoia" },
-  { nome: "Mercês", slug: "merces" },
-  { nome: "Novo Mundo", slug: "novo-mundo" },
-  { nome: "Parolin", slug: "parolin" },
-  { nome: "Pinheirinho", slug: "pinheirinho" },
-  { nome: "Portão", slug: "portao" },
-  { nome: "Prado Velho", slug: "prado-velho" },
-  { nome: "Rebouças", slug: "reboucas" },
-  { nome: "Santa Felicidade", slug: "santa-felicidade" },
-  { nome: "Santo Inácio", slug: "santo-inacio" },
-  { nome: "São Braz", slug: "sao-braz" },
-  { nome: "São Francisco", slug: "sao-francisco" },
-  { nome: "São João", slug: "sao-joao" },
-  { nome: "Sítio Cercado", slug: "sitio-cercado" },
-  { nome: "Tatuquara", slug: "tatuquara" },
-  { nome: "Xaxim", slug: "xaxim" },
-
-  // --- REGIÃO METROPOLITANA ---
-  { nome: "Araucária", slug: "araucaria" },
-  { nome: "Almirante Tamandaré", slug: "almirante-tamandare" },
-  { nome: "Balsa Nova", slug: "balsa-nova" },
-  { nome: "Colombo", slug: "colombo" },
-  { nome: "Contenda", slug: "contenda" },
-  { nome: "Fazenda Rio Grande", slug: "fazenda-rio-grande" },
-  { nome: "Lapa", slug: "lapa" },
-  { nome: "Pinhais", slug: "pinhais" },
-  { nome: "Piraquara", slug: "piraquara" },
-  { nome: "Quatro Barras", slug: "quatro-barras" },
-  { nome: "São José Dos Pinhais", slug: "sao-jose-dos-pinhais" },
-  { nome: "Rio Negro", slug: "rio-negro" },
-];
-
-const DESTAQUE = [
-  { nome: "Atuba", slug: "atuba" },
-  { nome: "Colombo", slug: "colombo" },
-  { nome: "Água Verde", slug: "agua-verde" },
-  { nome: "Batel", slug: "batel" },
-  { nome: "Centro", slug: "centro" },
-  { nome: "Santa Felicidade", slug: "santa-felicidade" },
-];
+import { BAIRROS } from '@/data/bairros';
 
 // 🎯 FUNÇÃO DE RASTREAMENTO GTM
 const trackEvent = (eventName, eventData) => {
@@ -79,8 +15,45 @@ const trackEvent = (eventName, eventData) => {
   }
 };
 
+// Organiza bairros por cidade
+const organizarPorCidade = () => {
+  const cidades = {
+    'Curitiba': [],
+    'Região Metropolitana': [],
+  };
+
+  BAIRROS.forEach(bairro => {
+    if (bairro.slug.includes('pinhais') || bairro.slug.includes('colombo') || bairro.slug.includes('sao-jose')) {
+      cidades['Região Metropolitana'].push(bairro);
+    } else if (bairro.nome.includes('Pinhais') || bairro.nome.includes('Colombo') || bairro.nome.includes('São José')) {
+      cidades['Região Metropolitana'].push(bairro);
+    } else {
+      cidades['Curitiba'].push(bairro);
+    }
+  });
+
+  return cidades;
+};
+
+const DESTAQUE = [
+  { nome: "Atuba", slug: "atuba" },
+  { nome: "Colombo", slug: "colombo" },
+  { nome: "Água Verde", slug: "agua-verde" },
+  { nome: "Batel", slug: "batel" },
+  { nome: "Centro", slug: "centro" },
+  { nome: "Santa Felicidade", slug: "santa-felicidade" },
+];
+
 export default function AreasAtendimento() {
-  const [expandido, setExpandido] = useState(false);
+  const [expandidos, setExpandidos] = useState({});
+  const cidades = organizarPorCidade();
+
+  const toggleCidade = (cidade) => {
+    setExpandidos(prev => ({
+      ...prev,
+      [cidade]: !prev[cidade]
+    }));
+  };
 
   // 🎯 SCHEMA MARKUP - Lista de Bairros para Google entender melhor
   const areaServedSchema = {
@@ -111,12 +84,12 @@ export default function AreasAtendimento() {
             Áreas de Atendimento
           </h2>
           <p className="text-gray-600 text-lg">
-            Atendemos montagem de móveis em 120+ bairros de Curitiba e Região Metropolitana
+            Atendemos montagem de móveis em {BAIRROS.length}+ bairros de Curitiba e Região Metropolitana
           </p>
         </div>
 
         {/* Bairros em destaque - Grid */}
-        <div className="mb-8">
+        <div className="mb-12">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-6">
             {DESTAQUE.map((bairro) => (
               <a
@@ -141,54 +114,58 @@ export default function AreasAtendimento() {
           </div>
         </div>
 
-        {/* Botão "Ver Todos" */}
-        <div className="flex justify-center mb-8">
-          <button
-            onClick={() => setExpandido(!expandido)}
-            className="
-              inline-flex items-center gap-2
-              px-6 py-3 rounded-full font-bold
-              bg-[#F2762E] text-white
-              hover:bg-[#E8651F]
-              transition-all duration-300
-            "
-            aria-expanded={expandido}
-            aria-label={expandido ? "Ver menos bairros" : "Ver todos os 120+ bairros"}
-          >
-            {expandido ? 'Ver Menos' : 'Ver Todos os 120+ Bairros'}
-            <ChevronDown
-              className={`h-5 w-5 transition-transform ${expandido ? 'rotate-180' : ''}`}
-              aria-hidden="true"
-            />
-          </button>
-        </div>
+        {/* Accordion por Cidade */}
+        <div className="space-y-3 mb-12">
+          {Object.entries(cidades).map(([cidade, bairros]) => (
+            <div key={cidade} className="border border-gray-200 rounded-lg overflow-hidden">
+              {/* Header do Accordion */}
+              <button
+                onClick={() => toggleCidade(cidade)}
+                className="
+                  w-full px-6 py-4 flex items-center justify-between
+                  bg-gray-50 hover:bg-gray-100 transition-colors
+                  font-semibold text-[#0148B2]
+                "
+              >
+                <span className="text-lg">
+                  {cidade} <span className="text-gray-500 font-normal">({bairros.length})</span>
+                </span>
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${expandidos[cidade] ? 'rotate-180' : ''}`}
+                  aria-hidden="true"
+                />
+              </button>
 
-        {/* Lista expandida */}
-        {expandido && (
-          <div className="bg-gray-50 rounded-lg p-6 md:p-8">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {BAIRROS.map((bairro) => (
-                <a
-                  key={bairro.slug}
-                  href={`/${bairro.slug}`}
-                  onClick={() => trackEvent('bairro_clicado', {
-                    bairro_nome: bairro.nome,
-                    tipo: 'lista'
-                  })}
-                  title={`Montador de móveis em ${bairro.nome}`}
-                  className="
-                    px-3 py-2 rounded text-sm font-medium
-                    text-[#0148B2] hover:bg-[#0148B2] hover:text-white
-                    transition-all duration-200
-                    border border-transparent hover:border-[#0148B2]
-                  "
-                >
-                  {bairro.nome}
-                </a>
-              ))}
+              {/* Conteúdo do Accordion */}
+              {expandidos[cidade] && (
+                <div className="bg-white px-6 py-6 border-t border-gray-200">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    {bairros.map((bairro) => (
+                      <a
+                        key={bairro.slug}
+                        href={`/${bairro.slug}`}
+                        onClick={() => trackEvent('bairro_clicado', {
+                          bairro_nome: bairro.nome,
+                          tipo: 'accordion',
+                          cidade: cidade
+                        })}
+                        title={`Montador de móveis em ${bairro.nome}`}
+                        className="
+                          px-3 py-2 rounded text-sm font-medium
+                          text-[#0148B2] hover:bg-[#0148B2] hover:text-white
+                          transition-all duration-200
+                          border border-transparent hover:border-[#0148B2]
+                        "
+                      >
+                        {bairro.nome}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          ))}
+        </div>
 
         {/* Texto descritivo + CTA */}
         <div className="mt-8 text-center">
