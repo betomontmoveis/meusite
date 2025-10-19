@@ -2,6 +2,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// 🎯 FUNÇÃO DE RASTREAMENTO GTM
+const trackEvent = (eventName, eventData) => {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...eventData,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
 // Ícone do WhatsApp em formato SVG para máxima qualidade e controle.
 const WhatsAppIcon = (props) => (
   <svg
@@ -14,26 +26,33 @@ const WhatsAppIcon = (props) => (
   </svg>
 );
 
-const WhatsAppButton = () => {
+const WhatsAppButton = ({ whatsappLink }) => {
   const phoneNumber = '5541997009479';
   const message = encodeURIComponent('Olá! Vi seu site e gostaria de fazer um orçamento.');
+  const defaultLink = `https://wa.me/${phoneNumber}?text=${message}`;
+  const finalLink = whatsappLink || defaultLink;
+
+  const handleWhatsAppClick = () => {
+    trackEvent('whatsapp_clicado', {
+      origem: 'botao_flutuante',
+      localizacao: 'canto_tela'
+    });
+  };
 
   return (
-    // Contêiner principal que agrupa o botão e o balão de texto.
-    // Ele é um link <a>, que é o correto para links externos.
     <motion.a
-      href={`https://wa.me/${phoneNumber}?text=${message}`}
+      href={finalLink}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleWhatsAppClick}
       className="group fixed bottom-6 right-6 z-50 flex items-center"
       aria-label="Fale comigo no WhatsApp!"
-      // Animações de entrada do Framer Motion
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.5, delay: 1.5, ease: "easeOut" }}
       whileTap={{ scale: 0.95 }}
     >
-      {/* O balão de texto que aparece ao passar o mouse (em telas de computador ) */}
+      {/* O balão de texto que aparece ao passar o mouse */}
       <div
         className="
           absolute right-full mr-4
