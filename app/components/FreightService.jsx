@@ -3,6 +3,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Truck, Package, CheckCircle, MessageSquare } from 'lucide-react'; 
 
+// 🎯 FUNÇÃO DE RASTREAMENTO GTM - UMA VEZ NO TOPO
+const trackEvent = (eventName, eventData) => {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...eventData,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
 // Array de Benefícios
 const benefits = [
     { text: "Logística Completa: Coleta e entrega no endereço desejado.", Icon: Package },
@@ -19,9 +31,9 @@ const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text
 const FreightService = ({ id }) => {
     // Array para as fotos do carro. Use AVIF!
     const carPhotos = [
-        '/transp1.avif', // 🚨 FOTO PRINCIPAL EM DESTAQUE (Carro inteiro)
-        '/transp2.avif', // Miniatura (Carro com logo)
-        '/transp3.avif', // Miniatura (Detalhe da amarração)
+        '/transp1.avif',
+        '/transp2.avif',
+        '/transp3.avif',
     ];
     
     return (
@@ -39,7 +51,6 @@ const FreightService = ({ id }) => {
                     <h2 className="text-4xl md:text-6xl font-bold text-[#0148B2] mb-4">
                         Montagem + Frete: Solução Completa!
                     </h2>
-                    {/* AQUI ESTÁ A MUDANÇA: max-w-md para o mobile e lg:max-w-3xl para o desktop */}
                     <p className="text-xl text-gray-600 max-w-md lg:max-w-3xl mx-auto">
     Móvel comprado? <br className="lg:hidden" /> Deixe a logística e a montagem por nossa conta.
     <br /> 
@@ -49,7 +60,7 @@ const FreightService = ({ id }) => {
 
                 <div className="flex flex-col lg:flex-row gap-12 items-center">
                     
-                    {/* Bloco de Fotos (Galeria Simples) - Onde a animação de hover é aplicada */}
+                    {/* Bloco de Fotos (Galeria Simples) */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -83,7 +94,7 @@ const FreightService = ({ id }) => {
                         </div>
                     </motion.div>
                     
-                    {/* Bloco de Benefícios/Texto (Mantido sem alteração) */}
+                    {/* Bloco de Benefícios/Texto */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -112,8 +123,11 @@ const FreightService = ({ id }) => {
                             href={whatsappLink} 
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-8 inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold rounded-full bg-[#F2762E] text-white transition-all duration-300 shadow-2xl hover:bg-[#F2762E]/
-                            90 transform hover:scale-[1.03]"
+                            onClick={() => trackEvent('whatsapp_clicado', {
+                              origem: 'secao_frete',
+                              localizacao: 'call_to_action'
+                            })}
+                            className="mt-8 inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold rounded-full bg-[#F2762E] text-white transition-all duration-300 shadow-2xl hover:bg-[#F2762E]/90 transform hover:scale-[1.03]"
                         >
                             <MessageSquare className="h-5 w-5" />
                             Solicitar Orçamento

@@ -3,6 +3,18 @@ import React from 'react';
 import * as fmMotion from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
+// 🎯 FUNÇÃO DE RASTREAMENTO GTM - UMA VEZ NO TOPO
+const trackEvent = (eventName, eventData) => {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...eventData,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
 const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", whatsappLinkProp }) => {
   const whatsappNumber = '41997009479';
   const predefinedMessage = customArea
@@ -21,17 +33,17 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
   // 🎨 CONTROLE DE TIPOGRAFIA E ESPAÇAMENTO
   const typography = {
     // Subtítulo
-    subtitleMobile: '14px',    // Ajuste aqui para mobile
-    subtitleTablet: '18px',    // Tablet
-    subtitleDesktop: '20px',   // Desktop
-    subtitleMarginBottom: '12px', // Espaço após subtítulo
+    subtitleMobile: '14px',
+    subtitleTablet: '18px',
+    subtitleDesktop: '20px',
+    subtitleMarginBottom: '12px',
 
     // Título Principal
-    titleMobile: '32px',       // Mobile
-    titleTablet: '48px',       // Tablet  
-    titleDesktop: '66px',      // Desktop
-    titleLineHeight: 1.1,      // Altura das linhas (1-1.5)
-    titleMarginBottom: '20px', // Espaço após título
+    titleMobile: '32px',
+    titleTablet: '48px',
+    titleDesktop: '66px',
+    titleLineHeight: 1.1,
+    titleMarginBottom: '20px',
 
     // Descrição
     descriptionMobile: '16px',
@@ -41,10 +53,10 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
     descriptionMarginBottom: '24px',
 
     // Espaçamento geral
-    containerPaddingMobile: '20px',    // Espaço lateral mobile
-    containerPaddingTablet: '32px',    // Espaço lateral tablet
-    containerPaddingDesktop: '80px',   // Espaço lateral desktop
-    containerPaddingTop: 'clamp(-40px, -5vw, -80px)',  // Mobile: 0px (sem subir) | Desktop: -10px (sobe)
+    containerPaddingMobile: '20px',
+    containerPaddingTablet: '32px',
+    containerPaddingDesktop: '80px',
+    containerPaddingTop: 'clamp(-40px, -5vw, -80px)',
   };
 
   return (
@@ -53,16 +65,16 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
       className="relative w-full overflow-hidden"
       style={{ 
         minHeight: '100vh',
-        display: 'flex',                // 🆕 AJUSTE - ativa alinhamento flex na seção
-        flexDirection: 'column',        // 🆕 AJUSTE - organiza verticalmente
-        justifyContent: 'center'        // 🆕 AJUSTE - centraliza o conteúdo no meio da tela
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
       }}
     >
       {/* 📸 Imagem de Fundo */}
       <img
         className="absolute inset-0 w-full h-full object-cover object-[40%_40%] lg:object-[70%_60%]"
-        alt="Montador de móveis profissional sorrindo com um ambiente de montagem de móveis."
-        src="/assemb01.png"
+        alt="Montador de móveis sorrindo com um ambiente de montagem de móveis."
+        src="/assemb01.avif"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0148B2]/95 via-[#0148B2]/90 to-transparent" />
 
@@ -70,7 +82,7 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
       <div
         className="relative w-full flex items-center"
         style={{
-          minHeight: 'calc(100vh - 60px)', // 🆕 AJUSTE - garante espaço p/ seta sem cortar
+          minHeight: 'calc(100vh - 60px)',
           marginTop: typography.containerPaddingTop,
         }}
       >
@@ -106,7 +118,7 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
                     fontSize: `clamp(${typography.subtitleMobile}, 4vw, ${typography.subtitleDesktop})`,
                   }}
                 >
-                  Beto, Montador de Móveis em{' '}
+                  Montador de Móveis em: {' '}
                   <span
                     className="inline-block px-3 py-1 rounded-full border-2 border-[#F2762E] mt-2"
                     style={{
@@ -119,21 +131,26 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
               </fmMotion.motion.div>
             )}
 
-            {/* 🎯 Título Principal */}
-            <fmMotion.motion.h1
+            {/* 🎯 Título Principal com H1 Dinâmico para SEO */}
+            <fmMotion.motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-black text-white tracking-tight"
-              style={{
-                fontSize: `clamp(${typography.titleMobile}, 8vw, ${typography.titleDesktop})`,
-                lineHeight: typography.titleLineHeight,
-                marginBottom: typography.titleMarginBottom,
-              }}
               suppressHydrationWarning
             >
-              Chega de se estressar com parafusos e manuais confusos.
-            </fmMotion.motion.h1>
+              <h1 className="sr-only">Montador de Móveis{customArea ? ` em ${customArea}` : ''}</h1>
+              
+              <div
+                className="font-black text-white tracking-tight"
+                style={{
+                  fontSize: `clamp(${typography.titleMobile}, 8vw, ${typography.titleDesktop})`,
+                  lineHeight: typography.titleLineHeight,
+                  marginBottom: typography.titleMarginBottom,
+                }}
+              >
+                Chega de se estressar com parafusos e manuais confusos.
+              </div>
+            </fmMotion.motion.div>
 
             {/* 💬 Texto Descritivo */}
             <fmMotion.motion.p
@@ -164,6 +181,10 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
                 href={finalWhatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('whatsapp_clicado', {
+                  origem: 'hero',
+                  localizacao: 'botao_principal'
+                })}
                 className="
                   inline-flex items-center justify-center gap-2
                   font-bold rounded-full
@@ -198,7 +219,7 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
       </div>
 
       {/* ⬇️ Indicador de Rolagem */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2"> {/* 🆕 Ajustado bottom de 8 → 6 */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
         <fmMotion.motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

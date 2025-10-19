@@ -1,22 +1,40 @@
 # /public/robots.txt
+# 🎯 OTIMIZADO PARA SEO LOCAL + PROTEÇÃO CONTRA SCRAPING
 
-# Regras gerais para todos os rastreadores
+# ========================================
+# REGRAS GERAIS PARA TODOS OS RASTREADORES
+# ========================================
 User-agent: *
 
-# Permite acesso a todas as páginas por padrão
+# ✅ PERMITE acesso a todas as páginas por padrão
 Allow: /
 
-# Bloqueia rotas administrativas, de API e dados brutos que não são para busca
+# ❌ BLOQUEIA rotas administrativas e de API
 Disallow: /admin
 Disallow: /api
+Disallow: /_next
+
+# ❌ BLOQUEIA arquivos JSON (dados brutos)
 Disallow: /*.json$
 
-# Bloqueia URLs com parâmetros de ordenação/filtro, que geralmente criam conteúdo duplicado
+# ❌ BLOQUEIA parâmetros de query que criam duplicatas
+Disallow: /?*
 Disallow: /*?sort=
 Disallow: /*?filter=
+Disallow: /*?page=
 
-# O Google e outros motores modernos ignoram 'Crawl-delay' e preferem gerenciar a taxa de rastreamento no Search Console.
-# Por isso, é melhor remover ou definir um valor de 0, mas vou removê-lo para a regra geral.
+# ========================================
+# BLOQUEIA RASTREADORES AGRESSIVOS
+# ========================================
+# Esses bots consomem muita banda e copiam conteúdo
 
-# --- Sitemap Location ---
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+User-agent: MJ12bot
+Disallow: /
+
+# ========================================
+# SITEMAP LOCATION
+# ========================================
 Sitemap: https://www.betomontadordemoveis.com.br/sitemap.xml

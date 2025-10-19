@@ -14,13 +14,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0148B2] text-white pt-8 py-12 mt-12">
+    <footer className="bg-[#0148B2] text-white py-16 mt-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* GRID PRINCIPAL */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-10 items-start content-start text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 items-start text-left">
           {/* COLUNA 1 */}
           <div className="text-left">
-            <h3 className="text-2xl font-bold mb-4 mt-0">
+            <h3 className="text-2xl font-bold mb-4">
               Beto Montador de Móveis
             </h3>
             <p className="text-white/80 leading-relaxed mb-6">
@@ -31,12 +31,13 @@ const Footer = () => {
 
             {/* REDES SOCIAIS */}
             <div>
-              <h4 className="text-lg font-semibold mb-3 mt-0">Siga-nos</h4>
+              <h4 className="text-lg font-semibold mb-3">Siga-nos</h4>
               <div className="flex gap-4">
                 <a
                   href="https://www.facebook.com/betomontagens/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  title="Visite nossa página no Facebook"
                   className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#F2762E] transition-all"
                 >
                   <Facebook className="w-5 h-5" />
@@ -45,6 +46,7 @@ const Footer = () => {
                   href="https://www.instagram.com/montagens.beto/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  title="Visite nosso Instagram"
                   className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#F2762E] transition-all"
                 >
                   <Instagram className="w-5 h-5" />
@@ -55,20 +57,22 @@ const Footer = () => {
 
           {/* COLUNA 2 */}
           <div className="text-left">
-            <h4 className="text-lg font-semibold mb-4 mt-0">Contato</h4>
+            <h4 className="text-lg font-semibold mb-4">Contato</h4>
             <div className="space-y-3">
               <a
                 href="tel:5541997009479"
+                title="Ligar para (41) 99700-9479"
                 className="flex items-center gap-2 text-white/80 hover:text-[#F2762E] transition-colors"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4 flex-shrink-0" />
                 (41) 99700-9479
               </a>
               <a
                 href="mailto:contato@betomontadordemoveis.com.br"
+                title="Enviar email para contato@betomontadordemoveis.com.br"
                 className="flex items-center gap-2 text-white/80 hover:text-[#F2762E] transition-colors break-all"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4 h-4 flex-shrink-0" />
                 contato@betomontadordemoveis.com.br
               </a>
             </div>
@@ -76,7 +80,7 @@ const Footer = () => {
 
           {/* COLUNA 3 */}
           <div className="text-left">
-            <h4 className="text-lg font-semibold mb-4 mt-0">
+            <h4 className="text-lg font-semibold mb-4">
               Informações Importantes
             </h4>
             <ul className="space-y-3">
@@ -84,6 +88,7 @@ const Footer = () => {
                 <a
                   href="#areas-atendimento"
                   onClick={handleScrollToSection}
+                  title="Ver áreas de atendimento"
                   className="text-white/80 hover:text-[#F2762E] transition-colors font-medium cursor-pointer"
                 >
                   Áreas de Atendimento (Curitiba e RMC)
@@ -94,17 +99,17 @@ const Footer = () => {
         </div>
 
         {/* DIVISÓRIA E COPYRIGHT */}
-        <div className="border-t border-white/20 pt-6 text-center text-sm">
-          <p className="text-white/70 mb-1">
-            © 2025 Todos os direitos reservados. | Beto Montador de Móveis | CNPJ:
-            46.566.508/0001-52
+        <div className="border-t border-white/20 pt-8 text-center text-sm">
+          <p className="text-white/70 mb-2">
+            © 2025 Todos os direitos reservados. | Beto Montador de Móveis | CNPJ: 46.566.508/0001-52
           </p>
           <p className="text-white/60">
             Site Criado Por{" "}
             <a
-              href="http://www.grsites.com.br"
+              href="https://www.grsites.com.br"
               target="_blank"
               rel="noopener noreferrer"
+              title="Visite GR Sites"
               className="text-[#F2762E] hover:text-white transition-colors font-semibold"
             >
               GR Sites

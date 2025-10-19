@@ -67,31 +67,66 @@ const DESTAQUE = [
   { nome: "Santa Felicidade", slug: "santa-felicidade" },
 ];
 
+// 🎯 FUNÇÃO DE RASTREAMENTO GTM
+const trackEvent = (eventName, eventData) => {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...eventData,
+      timestamp: new Date().toISOString()
+    });
+  }
+};
+
 export default function AreasAtendimento() {
   const [expandido, setExpandido] = useState(false);
 
+  // 🎯 SCHEMA MARKUP - Lista de Bairros para Google entender melhor
+  const areaServedSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Áreas de Atendimento - Montador de Móveis",
+    "description": "Lista de todos os bairros onde realizamos montagem de móveis em Curitiba e região",
+    "itemListElement": BAIRROS.map((bairro, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": bairro.nome,
+      "url": `https://www.betomontadordemoveis.com.br/${bairro.slug}`
+    }))
+  };
+
   return (
     <section className="bg-white py-16 px-6 mb-0">
+      {/* 🎯 SCHEMA MARKUP INJETADO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(areaServedSchema) }}
+      />
+
       <div className="container mx-auto max-w-6xl">
-        {/* Título */}
+        {/* Título com semântica melhorada */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-black text-[#0148B2] mb-2">
             Áreas de Atendimento
           </h2>
           <p className="text-gray-600 text-lg">
-            Atendemos em 120+ bairros de Curitiba e Região Metropolitana
+            Atendemos montagem de móveis em 120+ bairros de Curitiba e Região Metropolitana
           </p>
         </div>
 
-        {/* Cidades em destaque - Grid */}
+        {/* Bairros em destaque - Grid */}
         <div className="mb-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-6">
             {DESTAQUE.map((bairro) => (
               <a
                 key={bairro.slug}
                 href={`/${bairro.slug}`}
-                data-event="click_bairro_destaque"
-                data-bairro={bairro.nome}
+                onClick={() => trackEvent('bairro_clicado', {
+                  bairro_nome: bairro.nome,
+                  tipo: 'destaque'
+                })}
+                title={`Montador de móveis em ${bairro.nome} - Orçamento grátis`}
                 className="
                   px-4 py-3 rounded-lg text-center font-semibold
                   border-2 border-[#0148B2] text-[#0148B2]
@@ -117,10 +152,13 @@ export default function AreasAtendimento() {
               hover:bg-[#E8651F]
               transition-all duration-300
             "
+            aria-expanded={expandido}
+            aria-label={expandido ? "Ver menos bairros" : "Ver todos os 120+ bairros"}
           >
             {expandido ? 'Ver Menos' : 'Ver Todos os 120+ Bairros'}
             <ChevronDown
               className={`h-5 w-5 transition-transform ${expandido ? 'rotate-180' : ''}`}
+              aria-hidden="true"
             />
           </button>
         </div>
@@ -133,8 +171,11 @@ export default function AreasAtendimento() {
                 <a
                   key={bairro.slug}
                   href={`/${bairro.slug}`}
-                  data-event="click_bairro_lista"
-                  data-bairro={bairro.nome}
+                  onClick={() => trackEvent('bairro_clicado', {
+                    bairro_nome: bairro.nome,
+                    tipo: 'lista'
+                  })}
+                  title={`Montador de móveis em ${bairro.nome}`}
                   className="
                     px-3 py-2 rounded text-sm font-medium
                     text-[#0148B2] hover:bg-[#0148B2] hover:text-white
@@ -152,7 +193,7 @@ export default function AreasAtendimento() {
         {/* Texto descritivo + CTA */}
         <div className="mt-8 text-center">
           <p className="text-sm md:text-base text-gray-600 mb-4">
-            Não encontrou seu bairro? <span className="font-semibold text-[#0148B2]">Clique no WhatsApp</span> e consulte disponibilidade.
+            Não encontrou seu bairro? <span className="font-semibold text-[#0148B2]">Clique no WhatsApp</span> e consulte disponibilidade para montagem de móveis.
           </p>
           
           {/* Botão CTA */}
@@ -160,7 +201,10 @@ export default function AreasAtendimento() {
             href="https://wa.me/5541997009479?text=Olá! Preciso de um orçamento de montagem de móveis."
             target="_blank"
             rel="noopener noreferrer"
-            data-event="click_orcamento_whatsapp"
+            onClick={() => trackEvent('whatsapp_clicado', {
+              origem: 'areas_atendimento'
+            })}
+            title="Solicitar orçamento grátis de montagem de móveis pelo WhatsApp"
             className="
               inline-flex items-center justify-center gap-2
               px-6 py-3 rounded-full font-bold
@@ -175,6 +219,7 @@ export default function AreasAtendimento() {
               viewBox="0 0 24 24"
               fill="currentColor"
               className="h-5 w-5"
+              aria-hidden="true"
             >
               <path d="M20.52 3.48A11.91 11.91 0 0 0 12 0C5.38 0 .02 5.35.02 11.97c0 2.11.55 4.18 1.6 6.01L0 24l6.22-1.63a11.94 11.94 0 0 0 5.78 1.47h.01c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.22-3.47-8.38zM12 21.49h-.01a9.43 9.43 0 0 1-4.8-1.31l-.34-.2-3.69.97.99-3.6-.22-.37a9.42 9.42 0 0 1-1.43-4.99C2.5 6.67 6.67 2.5 12 2.5a9.47 9.47 0 0 1 9.49 9.48c0 5.23-4.26 9.51-9.49 9.51zm5.44-7.11c-.3-.15-1.78-.88-2.06-.97-.28-.1-.48-.15-.68.15s-.78.97-.96 1.18c-.18.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.48-.89-.8-1.49-1.78-1.66-2.08-.17-.3-.02-.46.13-.61.13-.12.3-.32.45-.48.15-.17.2-.28.3-.47.1-.2.05-.36-.02-.51-.07-.15-.68-1.63-.93-2.23-.25-.6-.5-.52-.68-.53h-.58c-.2 0-.51.07-.78.36-.26.3-1.02.99-1.02 2.4 0 1.4 1.04 2.75 1.19 2.94.15.2 2.05 3.12 4.97 4.38 2.93 1.26 2.93.84 3.46.79.53-.05 1.78-.73 2.03-1.43.25-.7.25-1.31.17-1.43-.08-.12-.27-.2-.57-.35z" />
             </svg>

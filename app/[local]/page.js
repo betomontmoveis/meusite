@@ -1,4 +1,6 @@
+// app/[local]/page.js
 import { BAIRROS } from "../../data/bairros";
+import { notFound } from 'next/navigation'; 
 // Importações do seu Layout
 import FreightService from "../components/FreightService";
 import Header from "../components/Header";
@@ -20,38 +22,54 @@ export async function generateStaticParams() {
   }));
 }
 
-// 2. Geração de Metadados (SEO Nativo do Next.js)
+// 2. Geração de Metadados (SEO Nativo do Next.js) - OTIMIZADO
 export async function generateMetadata({ params }) {
   const { local } = params;
   const bairroEncontrado = BAIRROS.find((b) => b.slug === local);
 
-  const nomeBairro = bairroEncontrado ? bairroEncontrado.nome : "Curitiba e Região Metropolitana";
-  
-  const tituloSEO = `Montador de Móveis Profissional em ${nomeBairro}`;
-  const descricaoSEO = `Serviço de montagem de móveis em ${nomeBairro}. Atendimento ágil, com garantia e preço justo. Chame agora o Beto Montador!`;
+  if (!bairroEncontrado) {
+    return { title: "Montador de Móveis - Área Não Encontrada" };
+  }
 
-  // URL canônica limpa (sem parâmetros)
-  const canonicalUrl = `https://www.betomontadordemoveis.com.br/${bairroEncontrado?.slug || 'curitiba'}`;
+  const nomeBairro = bairroEncontrado.nome;
+  
+  // 🎯 TÍTULO: Foco nas keywords mais buscadas + número de telefone (diferencial visual)
+  const tituloSEO = `Montador de Móveis em ${nomeBairro} | (41) 99700-9479`; 
+  
+  // 🎯 DESCRIÇÃO: Otimizada para CTR + cauda longa
+  const descricaoSEO = `Montador de móveis em ${nomeBairro} com montagem ágil, segura e preço justo. Orçamento grátis! Atendimento profissional.`;
+
+  // URL canônica limpa
+  const canonicalUrl = `https://www.betomontadordemoveis.com.br/${bairroEncontrado.slug}`;
 
   return {
     title: tituloSEO,
     description: descricaoSEO,
-    keywords: `montador de móveis ${nomeBairro}, montagem de móveis ${nomeBairro}, Beto montador ${nomeBairro}`,
+    // 🎯 KEYWORDS: Focar nas 4 principais buscas + variações
+    keywords: `montador de móveis, montador de moveis, montador de moveis em ${nomeBairro}, montador de móveis em ${nomeBairro}, montagem de móveis ${nomeBairro}, montagem de móveis em ${nomeBairro}`,
     alternates: {
       canonical: canonicalUrl,
     },
+    robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     openGraph: {
       title: tituloSEO,
       description: descricaoSEO,
       url: canonicalUrl,
       type: 'website',
+      siteName: 'Beto Montador de Móveis',
       images: [
         {
-          url: 'https://www.betomontadordemoveis.com.br/og-image.jpg',
+          url: 'https://www.betomontadordemoveis.com.br/og-image.jpg', 
           width: 1200,
           height: 630,
+          alt: `Montador de móveis em ${nomeBairro}`,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: tituloSEO,
+      description: descricaoSEO,
     },
   };
 }
@@ -62,22 +80,100 @@ export default function LocalPage({ params }) {
   const bairroEncontrado = BAIRROS.find((b) => b.slug === local);
   
   if (!bairroEncontrado) {
-    return (
-      <main className="text-center p-20">
-        <h1 className="text-3xl font-bold">404 | Bairro Não Atendido</h1>
-      </main>
-    ); 
+    notFound(); 
   }
 
   const nomeBairro = bairroEncontrado.nome;
   const whatsappLink = `https://wa.me/5541997009479?text=Olá! Preciso de um orçamento de montagem de móveis em ${nomeBairro}`; 
+  const canonicalUrl = `https://www.betomontadordemoveis.com.br/${bairroEncontrado.slug}`;
+  
+
+  // 🎯 SCHEMA MARKUP OTIMIZADO - LocalBusiness + FAQPage + Breadcrumb
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Montador de Móveis em " + nomeBairro,
+    "alternateName": "Beto Montador de Móveis",
+    "image": "https://www.betomontadordemoveis.com.br/logo-beto-montador.png",
+    "@id": "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6",
+    "url": canonicalUrl,
+    "telephone": "+55 41 99700-9479", 
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": nomeBairro,
+      "addressRegion": "PR",
+      "addressCountry": "BR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "areaServed": [ 
+      "Curitiba", "Pinhais", "Colombo", "São José dos Pinhais", "Araucária", "Campo Largo", "Campo Magro", "Almirante Tamandaré", "Fazenda Rio Grande"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "252"
+    },
+    "sameAs": [
+      "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6", 
+      "https://www.instagram.com/betomontador/", 
+      "https://www.facebook.com/betomontador/"
+    ],
+    "description": `Montador de móveis em ${nomeBairro}. Montagem ágil, segura e com preço justo. Atendimento profissional em residências e empresas.`,
+    "serviceArea": {
+      "@type": "City",
+      "name": nomeBairro,
+      "containedIn": {
+        "@type": "State",
+        "name": "PR"
+      }
+    }
+  };
+
+  // 🎯 BREADCRUMB SCHEMA - Importante para SEO Local
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.betomontadordemoveis.com.br"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": `Montador de Móveis em ${nomeBairro}`,
+        "item": canonicalUrl
+      }
+    ]
+  };
+
   
   return (
     <main>
+      {/* SCHEMA MARKUP OTIMIZADO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* HEADER FIXO NO TOPO */}
       <Header /> 
       
-      {/* 🎯 HERO - SEM WRAPPER EXTERNO, COMEÇA DIRETO */}
+      {/* 🎯 HERO COM H1 DINÂMICO OTIMIZADO */}
       <Hero 
         id="home"
         customArea={nomeBairro}

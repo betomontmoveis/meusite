@@ -16,7 +16,7 @@ export default function sitemap() {
     url: `${baseUrl}/${bairro.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
-    priority: 0.8,
+    priority: 0.9,
   }));
 
   // URLs de páginas estáticas (se tiver)
@@ -25,7 +25,7 @@ export default function sitemap() {
       url: `${baseUrl}/sobre`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/contato`,
