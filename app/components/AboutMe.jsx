@@ -26,7 +26,7 @@ const AboutMe = ({ bairro }) => {
             <p className="text-xl text-white/90 mb-6 leading-relaxed">
               Sou <span className="font-bold text-[#F2762E]">Beto</span>, montador profissional de móveis com mais de 
               <span className="font-bold text-[#F2762E]"> 15 anos de experiência</span> transformando 
-              <span className="font-semibold"> casas e escritórios em {bairro} e região metropolitana</span>.
+              <span className="font-semibold"> casas e escritórios em {bairro} e região </span>.
             </p>
 
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
