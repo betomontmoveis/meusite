@@ -91,8 +91,8 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
           style={{
             paddingLeft: `clamp(${typography.containerPaddingMobile}, 5vw, ${typography.containerPaddingDesktop})`,
             paddingRight: `clamp(${typography.containerPaddingMobile}, 5vw, ${typography.containerPaddingDesktop})`,
-            marginLeft: '-10px',
-            marginRight: '60px',
+            marginLeft: '0px',
+            marginRight: '0px',
           }}
         >
           <fmMotion.motion.div

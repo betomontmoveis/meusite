@@ -6,6 +6,7 @@ import FreightService from "../components/FreightService";
 import Header from "../components/Header";
 import Hero from "../components/Hero"; 
 import WhyChooseUs from "../components/WhyChooseUs";
+import AboutMe from "../components/AboutMe";
 import Services from "../components/Services";
 import Projects from "../components/Projects";
 import Testimonials from "../components/Testimonials";
@@ -182,6 +183,7 @@ export default function LocalPage({ params }) {
       
       {/* RESTANTE DO CONTEÚDO */}
       <WhyChooseUs />
+      <AboutMe />
       <Services id="servicos" />
       <FreightService id="frete" />
       <Projects id="projetos" />
