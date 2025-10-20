@@ -57,7 +57,7 @@ export const metadata = {
 
 const NOME_HOME = "Curitiba e Região";
 const TELEFONE_FIXO = "+55 41 99700-9479"; 
-const WHATSAPP_HOME = `https://wa.me/5541997009479?text=Olá! Preciso de um orçamento de montagem de móveis em ${NOME_HOME}`; 
+const WHATSAPP_HOME = `https://wa.me/5541997009479?text=Olá! Vim pelo site. Preciso de um orçamento de montagem de móveis em ${NOME_HOME}`; 
 
 
 // 🎯 SCHEMA MARKUP OTIMIZADO DA HOME PAGE

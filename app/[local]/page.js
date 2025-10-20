@@ -84,7 +84,7 @@ export default function LocalPage({ params }) {
   }
 
   const nomeBairro = bairroEncontrado.nome;
-  const whatsappLink = `https://wa.me/5541997009479?text=Olá! Preciso de um orçamento de montagem de móveis em ${nomeBairro}`; 
+  const whatsappLink = `https://wa.me/5541997009479?text=Olá! Vim pelo site. Preciso de um orçamento de montagem de móveis em ${nomeBairro}`; 
   const canonicalUrl = `https://www.betomontadordemoveis.com.br/${bairroEncontrado.slug}`;
   
 
