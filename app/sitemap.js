@@ -2,46 +2,44 @@ import { BAIRROS } from '@/data/bairros';
 
 export default function sitemap() {
   const baseUrl = 'https://www.betomontadordemoveis.com.br';
+  const lastModifiedDate = new Date('2025-10-20');
 
-  // URL da home
   const homeUrl = {
-    url: baseUrl,
-    lastModified: new Date(),
+    url: `${baseUrl}`,
+    lastModified: lastModifiedDate,
     changeFrequency: 'weekly',
     priority: 1.0,
   };
 
-  // URLs de todos os bairros
   const bairrosUrls = BAIRROS.map((bairro) => ({
     url: `${baseUrl}/${bairro.slug}`,
-    lastModified: new Date(),
+    lastModified: lastModifiedDate,
     changeFrequency: 'weekly',
     priority: 0.9,
   }));
 
-  // URLs de páginas estáticas (se tiver)
   const staticPages = [
     {
       url: `${baseUrl}/sobre`,
-      lastModified: new Date(),
+      lastModified: lastModifiedDate,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/contato`,
-      lastModified: new Date(),
+      lastModified: lastModifiedDate,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/politica-privacidade`,
-      lastModified: new Date(),
+      lastModified: lastModifiedDate,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
       url: `${baseUrl}/termos-servico`,
-      lastModified: new Date(),
+      lastModified: lastModifiedDate,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
