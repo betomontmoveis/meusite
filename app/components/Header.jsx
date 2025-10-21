@@ -4,32 +4,30 @@ import { Menu, X } from 'lucide-react';
 
 const navItems = [
     { name: 'Início', id: 'home' },
-    { name: 'Serviços', id: 'servicos' }, 
-    { name: 'Projetos', id: 'projetos' }, 
-    { name: 'Depoimentos', id: 'depoimentos' }, 
-    { name: 'Contato', id: 'contato' }, 
+    { name: 'Serviços', id: 'servicos' },
+    { name: 'Projetos', id: 'projetos' },
+    { name: 'Depoimentos', id: 'depoimentos' },
+    { name: 'Contato', id: 'contato' },
 ];
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false); 
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
-
         window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // ✅ SCROLL SUAVE e com offset dinâmico do header
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
         if (element) {
-            const offset = element.getBoundingClientRect().top + window.scrollY - 48; 
+            const headerHeight = document.querySelector('header')?.offsetHeight || 48;
+            const offset = element.getBoundingClientRect().top + window.scrollY - headerHeight;
             window.scrollTo({ top: offset, behavior: 'smooth' });
             setIsMenuOpen(false);
         }
@@ -45,8 +43,8 @@ const Header = () => {
         <header className={headerClasses}>
             <div className="container mx-auto px-4 md:px-8 max-w-7xl">
                 <nav className="flex items-center justify-between h-12">
-                    <div 
-                        className="text-base md:text-lg font-extrabold cursor-pointer" 
+                    <div
+                        className="text-base md:text-lg font-extrabold cursor-pointer"
                         onClick={() => scrollToSection('home')}
                     >
                         <span className="text-white">Beto </span>
@@ -76,12 +74,10 @@ const Header = () => {
             </div>
 
             {isMenuOpen && (
-                <div 
-                    className="md:hidden bg-[#0148B2] shadow-xl transition-all duration-300 ease-in-out"
-                >
+                <div className="md:hidden bg-[#0148B2] shadow-xl transition-all duration-300 ease-in-out">
                     {navItems.map((item) => (
-                        <div 
-                            key={item.id} 
+                        <div
+                            key={item.id}
                             onClick={() => scrollToSection(item.id)}
                             className="block px-4 py-3 text-white text-lg font-medium hover:bg-[#F2762E] transition-colors duration-200 cursor-pointer"
                         >

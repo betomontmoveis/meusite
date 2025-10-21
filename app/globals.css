@@ -9,12 +9,15 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Remove qualquer espaço branco ou margem padrão */
+/* Remove margens e impede rolagem lateral */
 html, body {
   margin: 0;
   padding: 0;
   border: 0;
-  background-color: #0148B2; /* fundo igual ao topo do header, evita faixa branca */
+  background-color: #0148B2; /* fundo igual ao header */
+  overflow-x: hidden !important; /* ✅ impede rolagem lateral azul */
+  width: 100%;
+  max-width: 100%;
 }
 
 /* ===============================
@@ -23,7 +26,7 @@ html, body {
 :root {
   --background: #ffffff;   /* fundo branco fixo */
   --foreground: #171717;   /* texto escuro padrão */
-  color-scheme: only light; /* força o navegador a ignorar modo escuro */
+  color-scheme: only light; /* ignora modo escuro do navegador */
 }
 
 /* Configuração de temas e fontes */
@@ -42,12 +45,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
 }
 
-/* Garante que o header sempre encoste no topo */
+/* Header fixo */
 header {
   margin: 0 !important;
   padding: 0.5rem 0;
@@ -60,10 +60,11 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* Compensa o header fixo (ajusta a primeira seção) */
+/* Main sem espaçamento extra (Hero já compensa o header) */
 main {
-  padding-top: 0px; /* mesmo tamanho da altura do header */
+  padding-top: 0;
   background-color: var(--background);
+  overflow-x: hidden; /* reforço extra */
 }
 
 /* Footer */
@@ -76,7 +77,7 @@ footer {
 }
 
 /* ===============================
-   🆕 FONTES GLOBAIS (SEM ERROS)
+   🆕 FONTES GLOBAIS
    =============================== */
 
 /* Poppins → textos do corpo */

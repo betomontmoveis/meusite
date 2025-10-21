@@ -59,17 +59,18 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
     containerPaddingTop: 'clamp(-40px, -5vw, -80px)',
   };
 
-  return (
-    <section
-      id={id}
-      className="relative w-full overflow-hidden"
-      style={{ 
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center'
-      }}
-    >
+return (
+  <section
+    id={id}
+    className="relative w-full overflow-hidden"
+    style={{ 
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      paddingTop: '48px' // ✅ compensa o header fixo
+    }}
+  >
       {/* 📸 Imagem de Fundo */}
       <img
         className="absolute inset-0 w-full h-full object-cover object-[40%_40%] lg:object-[70%_60%]"
