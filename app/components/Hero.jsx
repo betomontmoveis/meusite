@@ -39,7 +39,7 @@ const Hero = ({ id = "home", customArea = "Curitiba e Região Metropolitana", wh
 
     titleMobile: '32px',
     titleTablet: '48px',
-    titleDesktop: '66px',
+    titleDesktop: '50px',
     titleLineHeight: 1.1,
     titleMarginBottom: '20px',
 
