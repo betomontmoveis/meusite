@@ -92,7 +92,7 @@ const localBusinessSchema = {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
-    "reviewCount": "252"
+    "reviewCount": "257"
   },
   "sameAs": [
     "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6",
