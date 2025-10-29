@@ -119,7 +119,7 @@ export const BAIRROS = [
     { nome: "Guarituba Colombo", slug: "guarituba-colombo" },
     { nome: "Borda Do Campo São José Dos Pinhais", slug: "borda-do-campo-sao-jose-dos-pinhais" },
     { nome: "Jardim Paulista Campina Grande Do Sul", slug: "jardim-paulista-campina-grande-do-sul" },
-    { nome: "Jardim Menino De Deus Quatro Barras", slug: "jardim-menino-de-deus-quatro-barras" },
+    { nome: "Jardim Menino Deus Quatro Barras", slug: "jardim-menino-deus-quatro-barras" },
     { nome: "Maracanã Colombo", slug: "maracana-colombo" },
     { nome: "Guaraituba Colombo", slug: "guaraituba-colombo" },
     { nome: "São Gabriel Colombo", slug: "sao-gabriel-colombo" },
