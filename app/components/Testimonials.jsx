@@ -128,7 +128,7 @@ const Testimonials = ({ id }) => {
               ))}
             </div>
             <span className="text-xl font-medium ml-3 text-white/80">
-              (252 Avaliações)
+              (257 Avaliações)
             </span>
           </div>
         </motion.div>
@@ -183,7 +183,7 @@ const Testimonials = ({ id }) => {
             Qualidade e confiança comprovadas.
             <br />
             <span className="font-bold">
-              Confira nossas 250 avaliações 5 estrelas diretamente no Google!
+              Confira nossas 257 avaliações 5 estrelas diretamente no Google!
             </span>
           </p>
 
