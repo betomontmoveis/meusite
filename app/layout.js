@@ -25,7 +25,7 @@ export const metadata = {
   
   // 🎯 FAVICON - Seu arquivo JPG convertido para ICO
   icons: {
-    icon: '/favv.ico', // Coloque aqui após converter fav.jpg para .ico
+    icon: '/favicon.ico', // Coloque aqui após converter fav.jpg para .ico
     shortcut: '/favicon.ico',
     apple: '/apple-icon.png', // Opcional: para iPhone/iPad
   },
