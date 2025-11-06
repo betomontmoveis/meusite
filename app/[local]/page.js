@@ -84,7 +84,7 @@ export default function LocalPage({ params }) {
     "name": `Montador de Móveis em ${nomeBairro}`,
     "alternateName": "Beto Montador de Móveis",
     "image": "https://www.betomontadordemoveis.com.br/favv.png",
-    "@id": "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6",
+    "@id": "https://www.betomontadordemoveis.com.br/#localbusiness",
     "url": canonicalUrl,
     "telephone": "+55 41 99700-9479", 
     "priceRange": "$$",
