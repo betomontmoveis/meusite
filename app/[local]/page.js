@@ -113,7 +113,6 @@ export default function LocalPage({ params }) {
       "reviewCount": "257"
     },
     "sameAs": [
-      "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6", 
       "https://www.instagram.com/betomontador/", 
       "https://www.facebook.com/betomontador/"
     ],
