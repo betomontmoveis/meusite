@@ -89,6 +89,25 @@ export default function RootLayout({ children }) {
         {/* 🎯 PRECONNECT PARA MELHOR PERFORMANCE */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* 🧩 SCHEMA.ORG - LOGO PARA GOOGLE SEARCH */}
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Beto Montador de Móveis",
+              "url": "https://www.betomontadordemoveis.com.br",
+              "logo": "https://www.betomontadordemoveis.com.br/icon.png",
+              "sameAs": [
+                "https://www.facebook.com/betomontadordemoveis",
+                "https://www.instagram.com/betomontadordemoveis"
+              ]
+            }),
+          }}
+        />
       </head>
 
       <body className="font-sans antialiased bg-white text-gray-900">
