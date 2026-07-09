@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const { local } = params;
+  const { local } = await params; // ✅ await adicionado
   const bairroEncontrado = BAIRROS.find((b) => b.slug === local);
 
   if (!bairroEncontrado) {
@@ -29,9 +29,9 @@ export async function generateMetadata({ params }) {
 
   const nomeBairro = bairroEncontrado.nome;
   
-  const tituloSEO = `Montador de Móveis em ${nomeBairro} | Orçamento Grátis (41) 99700-9479`; 
+  const tituloSEO = `Montador de Móveis ${nomeBairro} | Orçamento Grátis (41) 99700-9479`; 
   
-  const descricaoSEO = `Montador de móveis em ${nomeBairro}. Montagem rápida, segura e com preço justo. Montagem de guarda-roupa, rack, cozinha planejada e mais. Atendimento em residências e empresas. Solicite orçamento grátis!`;
+  const descricaoSEO = `Serviço de montagem de móveis em ${nomeBairro}. Montagem rápida, segura e com preço justo. Guarda-roupa, rack, cozinha planejada e mais. Atendimento em residências e empresas. Solicite orçamento grátis!`;
 
   const canonicalUrl = `https://www.betomontadordemoveis.com.br/${bairroEncontrado.slug}`;
 
@@ -44,14 +44,14 @@ export async function generateMetadata({ params }) {
     },
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     openGraph: {
-      title: `Montador de Móveis em ${nomeBairro}`,
+      title: `Montador de Móveis ${nomeBairro}`,
       description: descricaoSEO,
       url: canonicalUrl,
       type: 'website',
       siteName: 'Montador de Móveis',
       images: [
         {
-          url: 'https://www.betomontadordemoveis.com.br/og-image.jpg', 
+          url: 'https://www.betomontadordemoveis.com.br/favv.png', 
           width: 1200,
           height: 630,
           alt: `Montador de móveis em ${nomeBairro}`,
@@ -60,14 +60,14 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Montador de Móveis em ${nomeBairro}`,
+      title: `Montador de Móveis ${nomeBairro}`,
       description: `Montagem rápida, segura e com preço justo em ${nomeBairro}`,
     },
   };
 }
 
-export default function LocalPage({ params }) {
-  const { local } = params;
+export default async function LocalPage({ params }) { // ✅ async adicionado
+  const { local } = await params; // ✅ await adicionado
   const bairroEncontrado = BAIRROS.find((b) => b.slug === local);
   
   if (!bairroEncontrado) {
@@ -81,7 +81,7 @@ export default function LocalPage({ params }) {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": `Montador de Móveis em ${nomeBairro}`,
+    "name": `Montador de Móveis ${nomeBairro}`,
     "alternateName": "Beto Montador de Móveis",
     "image": "https://www.betomontadordemoveis.com.br/favv.png",
     "@id": "https://www.betomontadordemoveis.com.br/#localbusiness",
@@ -110,7 +110,7 @@ export default function LocalPage({ params }) {
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
-      "reviewCount": "257"
+      "reviewCount": "262"
     },
     "sameAs": [
       "https://www.instagram.com/betomontador/", 
@@ -125,6 +125,111 @@ export default function LocalPage({ params }) {
         "name": "Paraná"
       }
     }
+  };
+
+  // ✅ NOVO: Schema de Service com Reviews (para exibir estrelas)
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `Montagem de Móveis em ${nomeBairro}`,
+    "image": "https://www.betomontadordemoveis.com.br/favv.png",
+    "description": `Serviço profissional de montagem de móveis em ${nomeBairro}. Guarda-roupas, racks, cozinhas planejadas e mais.`,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Beto Montador de Móveis",
+      "telephone": "+55 41 99700-9479",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": nomeBairro,
+        "addressRegion": "PR",
+        "addressCountry": "BR"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "262",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Everton Luiz"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Muito boa a montagem final do móvel"
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Ângela Nunes"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Gostaria de parabenizar o Beto pelo trabalho realizado no meu apartamento, cheguei em casa estava tudo perfeito conforme solicitado, minha cozinha está linda, ele caprichou em cada detalhe, empresa de confiança, estava o tempo todo me posicionando de como iria ficar o móvel. Super indico nota 1000"
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Márcia Regina Silva"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Trabalho perfeito"
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Jhenifer Vanessa"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Excelente trabalho vieram montar o guarda roupa da minha neném ficou perfeito são muito caprichoso limpam tudo não deixa um lixinho pra trás. Minha tv que ninguém tava conseguindo instalar pq o parafuso do suporte não dava ele veio e instalou, eles tem material deles caso não dá eles tem a solução. Super indico mesmo."
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Douglas Souza"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Super recomendado um trabalho excelente"
+      }
+    ]
+  };
+
+  // ✅ NOVO: Schema de ImageObject (ajuda o Google a entender a imagem)
+  const imageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    "url": "https://www.betomontadordemoveis.com.br/favv.png",
+    "width": "1200",
+    "height": "630",
+    "caption": `Montador de móveis profissional em ${nomeBairro}`,
+    "description": `Serviço de montagem de móveis em ${nomeBairro} - Beto Montador`
   };
 
   const breadcrumbSchema = {
@@ -151,6 +256,14 @@ export default function LocalPage({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchema) }}
       />
       <script
         type="application/ld+json"

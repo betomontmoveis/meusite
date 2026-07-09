@@ -14,22 +14,22 @@ import Header from "./components/Header";
 
 
 export const metadata = {
-  title: "Montador de Móveis em Curitiba e Região | Orçamento Grátis (41) 99700-9479",
-  description: "Montador de móveis em Curitiba e região metropolitana. Montagem rápida, segura e com preço justo. Montagem de guarda-roupa, rack, cozinha e mais. Atendimento em residências e empresas. Solicite orçamento grátis!",
+  title: "Montador de Móveis Curitiba e Região | Orçamento Grátis (41) 99700-9479",
+  description: "Serviço de montagem de móveis em Curitiba e região metropolitana. Montagem rápida, segura e com preço justo. Guarda-roupa, rack, cozinha planejada e mais. Atendimento em residências e empresas. Solicite orçamento grátis!",
   alternates: {
     canonical: 'https://www.betomontadordemoveis.com.br',
   },
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  keywords: "montador de móveis, montador de moveis, montador de móveis em curitiba, montador de moveis em curitiba, montagem de móveis curitiba, montador, montador de móveis perto de mim, montagem de guarda-roupa, montador de móveis região metropolitana",
+  keywords: "montador de móveis, montador de moveis, montador de móveis curitiba, montador de moveis curitiba, montagem de móveis curitiba, montador, montador de móveis perto de mim, montagem de guarda-roupa, montador de móveis região metropolitana",
   openGraph: {
-    title: "Montador de Móveis em Curitiba e Região Metropolitana", 
+    title: "Montador de Móveis Curitiba e Região Metropolitana", 
     description: "Montagem de móveis com rapidez, segurança e preço justo em Curitiba e região.",
     url: "https://www.betomontadordemoveis.com.br",
     type: "website",
     siteName: "Montador de Móveis Curitiba",
     images: [
       {
-        url: "https://www.betomontadordemoveis.com.br/og-image.jpg", 
+        url: "https://www.betomontadordemoveis.com.br/favv.png", 
         width: 1200,
         height: 630,
         alt: "Montador de móveis em Curitiba e região metropolitana",
@@ -38,7 +38,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Montador de Móveis em Curitiba e Região",
+    title: "Montador de Móveis Curitiba e Região",
     description: "Montagem rápida, segura e com preço justo",
   },
 };
@@ -50,7 +50,7 @@ const WHATSAPP_HOME = `https://wa.me/5541997009479?text=Olá! Vim pelo site. Pre
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Montador de Móveis em Curitiba",
+  "name": "Montador de Móveis Curitiba",
   "alternateName": "Beto Montador de Móveis",
   "image": "https://www.betomontadordemoveis.com.br/favv.png", 
   "@id": "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6",
@@ -92,14 +92,119 @@ const localBusinessSchema = {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
-    "reviewCount": "257"
+    "reviewCount": "262"
   },
   "sameAs": [
     "https://maps.app.goo.gl/Yw22JidL5A3JVqDd6",
     "https://www.instagram.com/betomontador/",
     "https://www.facebook.com/betomontador/"
   ],
-  "description": "Montador de móveis profissional em Curitiba e região metropolitana. Montagem rápida, segura e com preço justo. Atendimento confiável para residências e empresas."
+  "description": "Montador de móveis em Curitiba e região metropolitana. Montagem rápida, segura e com preço justo. Atendimento confiável para residências e empresas."
+};
+
+// ✅ NOVO: Schema de Service com Reviews (para estrelas no Google)
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Montagem de Móveis Curitiba e Região",
+  "image": "https://www.betomontadordemoveis.com.br/favv.png",
+  "description": "Serviço profissional de montagem de móveis em Curitiba e região metropolitana. Guarda-roupas, racks, cozinhas planejadas e mais.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Beto Montador de Móveis",
+    "telephone": "+55 41 99700-9479",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Curitiba",
+      "addressRegion": "PR",
+      "addressCountry": "BR"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "262",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Everton Luiz"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Muito boa a montagem final do móvel"
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Ângela Nunes"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Gostaria de parabenizar o Beto pelo trabalho realizado no meu apartamento, cheguei em casa estava tudo perfeito conforme solicitado, minha cozinha está linda, ele caprichou em cada detalhe, empresa de confiança, estava o tempo todo me posicionando de como iria ficar o móvel. Super indico nota 1000"
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Márcia Regina Silva"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Trabalho perfeito"
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Jhenifer Vanessa"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Excelente trabalho vieram montar o guarda roupa da minha neném ficou perfeito são muito caprichoso limpam tudo não deixa um lixinho pra trás. Minha tv que ninguém tava conseguindo instalar pq o parafuso do suporte não dava ele veio e instalou, eles tem material deles caso não dá eles tem a solução. Super indico mesmo."
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Douglas Souza"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Super recomendado um trabalho excelente"
+    }
+  ]
+};
+
+// ✅ NOVO: Schema de ImageObject
+const imageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "url": "https://www.betomontadordemoveis.com.br/favv.png",
+  "width": "1200",
+  "height": "630",
+  "caption": "Montador de móveis profissional em Curitiba e região metropolitana",
+  "description": "Serviço de montagem de móveis em Curitiba - Beto Montador"
 };
 
 const breadcrumbSchema = {
@@ -120,7 +225,7 @@ const organizationSchema = {
   "@type": "Organization",
   "name": "Beto Montador de Móveis",
   "url": "https://www.betomontadordemoveis.com.br",
-  "logo": "https://www.betomontadordemoveis.com.br/logo.png",
+  "logo": "https://www.betomontadordemoveis.com.br/favv.png",
   "sameAs": [
     "https://www.instagram.com/betomontador/",
     "https://www.facebook.com/betomontador/",
@@ -139,6 +244,14 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchema) }}
       />
       <script
         type="application/ld+json"
