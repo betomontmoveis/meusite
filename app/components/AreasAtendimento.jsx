@@ -35,14 +35,8 @@ const organizarPorCidade = () => {
   return cidades;
 };
 
-const DESTAQUE = [
-  { nome: "Atuba", slug: "atuba" },
-  { nome: "Colombo", slug: "colombo" },
-  { nome: "Água Verde", slug: "agua-verde" },
-  { nome: "Batel", slug: "batel" },
-  { nome: "Centro", slug: "centro" },
-  { nome: "Santa Felicidade", slug: "santa-felicidade" },
-];
+const NOMES_DESTAQUE = ["Atuba", "Colombo", "Água Verde", "Batel", "Centro", "Santa Felicidade"];
+const DESTAQUE = BAIRROS.filter(b => NOMES_DESTAQUE.includes(b.nome));
 
 export default function AreasAtendimento() {
   const [expandidos, setExpandidos] = useState({});

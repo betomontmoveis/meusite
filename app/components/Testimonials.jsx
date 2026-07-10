@@ -6,11 +6,7 @@ import { usePathname } from "next/navigation"; // <-- para capturar o slug da UR
 
 // Ícone do Google colorido
 const GoogleG = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 533.5 544.3"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" {...props}>
     <path
       fill="#4285F4"
       d="M533.5 244.3c0-18-1.5-36-4.5-53.5H272v100h152c-8.5 48-36.5 88-79.5 115.5l.5 2.5 83 64c50-46 79-113 79-199z"
@@ -84,9 +80,7 @@ const Testimonials = ({ id }) => {
   // 🔤 Converte slug para nome bonito com acento e capitalização
   const bairro =
     slug && slug !== "curitiba"
-      ? slug
-          .replace(/-/g, " ")
-          .replace(/\b\w/g, (l) => l.toUpperCase())
+      ? slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
       : "Curitiba";
 
   const googleReviewsLink = "https://g.page/r/CREM0fTtskMxEAI/review";
@@ -115,21 +109,47 @@ const Testimonials = ({ id }) => {
             O Que Dizem Meus Clientes em {bairro}
           </h2>
 
-          <div className="flex items-center justify-center mb-6">
-            <span className="text-4xl font-extrabold text-[#F2762E] mr-3">
-              5.0
-            </span>
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-6 h-6 fill-[#F2762E] text-[#F2762E]"
+          <div className="flex justify-center mb-8">
+           <a href="https://g.page/r/CREM0fTtskMxEAI/review" target="_blank" rel="noopener noreferrer" className="bg-white rounded-3xl shadow-2xl px-8 py-6 max-w-xl w-full border-4 border-[#F2762E] hover:scale-[1.02] hover:border-[#E8651F] transition-all duration-300 cursor-pointer block">
+              <div className="flex justify-center mb-3">
+                <img
+                  src="/avaliacoesgoogle.png"
+                  alt="Google 5 estrelas"
+                  className="h-16 object-contain"
                 />
-              ))}
-            </div>
-            <span className="text-xl font-medium ml-3 text-white/80">
-              (326 Avaliações)
-            </span>
+              </div>
+
+              <h3 className="text-5xl font-black text-[#0148B2] text-center">
+                5.0
+              </h3>
+
+              <p className="text-lg font-bold text-center text-gray-800 mt-2">
+                Avaliação Excelente
+              </p>
+
+              <p className="text-center text-gray-600 mt-1">
+                Baseado em{" "}
+                <span className="font-bold text-[#0148B2]">
+                  326 avaliações reais
+                </span>
+              </p>
+
+              <div className="flex items-center justify-center gap-2 mt-5 text-green-600 font-semibold">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Avaliações verificadas no Google
+              </div>
+            </a>
           </div>
         </motion.div>
 
@@ -178,25 +198,7 @@ const Testimonials = ({ id }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center"
-        >
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-6">
-            Qualidade e confiança comprovadas.
-            <br />
-            <span className="font-bold">
-              Confira nossas 326 avaliações 5 estrelas diretamente no Google!
-            </span>
-          </p>
-
-          <a
-            href={googleReviewsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 text-xl font-bold bg-white rounded-full text-[#0148B2] hover:bg-gray-100 transition-colors duration-300 shadow-2xl transform hover:scale-[1.02]"
-          >
-            <GoogleG className="w-6 h-6" />
-            Ver Todas as Avaliações no Google
-          </a>
-        </motion.div>
+        ></motion.div>
       </div>
     </section>
   );
