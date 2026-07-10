@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { usePathname } from "next/navigation"; // <-- para capturar o slug da URL
+import { BAIRROS } from "@/data/bairros";
 
 // Ícone do Google colorido
 const GoogleG = (props) => (
@@ -77,11 +78,8 @@ const Testimonials = ({ id }) => {
   // 🔍 Captura o último segmento da URL (ex: "tingui" em /tingui)
   const slug = pathname?.split("/").filter(Boolean).pop() || "";
 
-  // 🔤 Converte slug para nome bonito com acento e capitalização
-  const bairro =
-    slug && slug !== "curitiba"
-      ? slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
-      : "Curitiba";
+  const bairroEncontrado = BAIRROS.find((b) => b.slug === slug);
+const bairro = bairroEncontrado ? bairroEncontrado.nome : "Curitiba";
 
   const googleReviewsLink = "https://g.page/r/CREM0fTtskMxEAI/review";
 
