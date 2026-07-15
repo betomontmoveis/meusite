@@ -2,7 +2,9 @@ import { BAIRROS } from '@/data/bairros';
 
 export default function sitemap() {
   const baseUrl = 'https://www.betomontadordemoveis.com.br';
-  const lastModifiedDate = new Date('2025-10-20');
+
+  // ✅ Data dinâmica: atualiza sozinha a cada build/deploy
+  const lastModifiedDate = new Date();
 
   const homeUrl = {
     url: `${baseUrl}`,
@@ -18,32 +20,9 @@ export default function sitemap() {
     priority: 0.9,
   }));
 
-  const staticPages = [
-    {
-      url: `${baseUrl}/sobre`,
-      lastModified: lastModifiedDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contato`,
-      lastModified: lastModifiedDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/politica-privacidade`,
-      lastModified: lastModifiedDate,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/termos-servico`,
-      lastModified: lastModifiedDate,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-  ];
+  // ❌ Removido: /sobre, /contato, /politica-privacidade, /termos-servico
+  // Essas páginas não existem como rotas — são apenas âncoras (#servicos, #contato etc)
+  // dentro da própria home, então não devem aparecer no sitemap.
 
-  return [homeUrl, ...bairrosUrls, ...staticPages];
+  return [homeUrl, ...bairrosUrls];
 }
